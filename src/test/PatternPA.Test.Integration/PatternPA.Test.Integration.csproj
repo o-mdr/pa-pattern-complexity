@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5051A0FF-41F2-4B80-B218-40B03AE7524E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PatternPA.Test.Integration</RootNamespace>
+    <AssemblyName>PatternPA.Test.Integration</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|AnyCPU'">
+    <OutputPath>bin\Production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnitTestAdapter.WithFramework.2.0.0\lib\nunit.core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.core.interfaces, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnitTestAdapter.WithFramework.2.0.0\lib\nunit.core.interfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnitTestAdapter.WithFramework.2.0.0\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.util, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnitTestAdapter.WithFramework.2.0.0\lib\nunit.util.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NUnit.VisualStudio.TestAdapter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4cb40d35494691ac, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnitTestAdapter.WithFramework.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="pnunit.framework, Version=1.0.4109.34242, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractGroupTest.cs" />
+    <Compile Include="AbstractIntegrationTest.cs" />
+    <Compile Include="LongRunningManualTests\GroupTests.cs" />
+    <Compile Include="ManagementFixture.cs" />
+    <Compile Include="Nhanes\ArtificialGenerator\NhanesGroupTest.cs" />
+    <Compile Include="Nhanes\ArtificialGenerator\NhanesPersonTest.cs" />
+    <Compile Include="Nhanes\LongRunningManualTests\LongRunningSetUpFixture.cs" />
+    <Compile Include="Nhanes\LongRunningManualTests\NhanesGroupTest.cs" />
+    <Compile Include="Nhanes\NhanesGroupTest.cs" />
+    <Compile Include="Nhanes\ProcessPamFiles.cs" />
+    <Compile Include="Subjects\GroupTest.cs" />
+    <Compile Include="Nhanes\NhanesPersonTest.cs" />
+    <Compile Include="Subjects\PersonCoarseGrainingTest.cs" />
+    <Compile Include="Subjects\PersonTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subjects\Sample1.cs" />
+    <Compile Include="Subjects\Sample1Entropy.cs" />
+    <Compile Include="Subjects\SubjectTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\app\PatternPA.Container\PatternPA.Container.csproj">
+      <Project>{11662EB6-9FB0-4C64-A815-37E8F5490D71}</Project>
+      <Name>PatternPA.Container</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\PatternPA.Core\PatternPA.Core.csproj">
+      <Project>{D030EBAC-67F7-4F40-A379-7139402A93DE}</Project>
+      <Name>PatternPA.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\PatternPA.Infrastructure\PatternPA.Infrastructure.csproj">
+      <Project>{3408D3E7-809F-4BCB-B102-7E449D75F786}</Project>
+      <Name>PatternPA.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\PatternPA.Utils\PatternPA.Utils.csproj">
+      <Project>{D7113DCD-84EB-45FE-8ED5-7565FF239BBA}</Project>
+      <Name>PatternPA.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <!--<ItemGroup>
+		<None Include="App.config" />
+	</ItemGroup>-->
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <None Include="Config\App.Release.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\App.Debug.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\App.Production.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\App.UAT.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Data\2003TrimmedEvents.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\21015.Nhanes.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="AfterBuild">
+    <Delete Files="$(TargetDir)$(TargetFileName).config" />
+    <Copy SourceFiles="$(ProjectDir)\Config\App.$(Configuration).config" DestinationFiles="$(TargetDir)$(TargetFileName).config" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props'))" />
+  </Target>
+</Project>

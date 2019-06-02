@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3408D3E7-809F-4BCB-B102-7E449D75F786}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PatternPA.Infrastructure</RootNamespace>
+    <AssemblyName>PatternPA.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|x86'">
+    <OutputPath>bin\x86\UAT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|x86'">
+    <OutputPath>bin\x86\Production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Factories\GroupFactory.cs" />
+    <Compile Include="Factories\NhanesGroupFactory.cs" />
+    <Compile Include="Factories\NhanesPersonFactory.cs" />
+    <Compile Include="Factories\PersonFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AbstractService.cs" />
+    <Compile Include="Services\AutocorrelationService.cs" />
+    <Compile Include="Services\CompressionRatesService.cs" />
+    <Compile Include="Services\EntropyResultService.cs" />
+    <Compile Include="Services\GroupService.cs" />
+    <Compile Include="Services\IntervalSnapshotsService.cs" />
+    <Compile Include="Services\NhanesGroupService.cs" />
+    <Compile Include="Services\NhanesPersonService.cs" />
+    <Compile Include="Services\NhanesService.cs" />
+    <Compile Include="Services\PersonCalculationService.cs" />
+    <Compile Include="Services\PersonService.cs" />
+    <Compile Include="Services\GenericService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PatternPA.Container\PatternPA.Container.csproj">
+      <Project>{11662EB6-9FB0-4C64-A815-37E8F5490D71}</Project>
+      <Name>PatternPA.Container</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PatternPA.Core\PatternPA.Core.csproj">
+      <Project>{D030EBAC-67F7-4F40-A379-7139402A93DE}</Project>
+      <Name>PatternPA.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PatternPA.Utils\PatternPA.Utils.csproj">
+      <Project>{D7113DCD-84EB-45FE-8ED5-7565FF239BBA}</Project>
+      <Name>PatternPA.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
