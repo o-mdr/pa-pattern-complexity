@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Download data, verify integrity, unzip
+
+set -Eeou pipefail
+
+cd "$(dirname "$0")/.." || exit
+
+process_nhanes_file() {
+  URL=$1
+  SOURCE="data/$2"
+  echo "==> Downloading NHANES Physical Activity Monitoring data ($SOURCE)..."
+  if [ ! -f "$SOURCE" ]; then
+    curl -LS $URL -o "$SOURCE"
+    echo "    Done"
+  else
+    echo "    File $SOURCE already exist and will be re-used"
+  fi
+
+  echo "    Unzipping data"
+  unzip -fqq "$SOURCE" -d "data"
+
+  echo "    Converting XPT to CSV format"
+  DECOMPRESSED_FILE="data/$(unzip -Z -1 $SOURCE)"
+  Rscript --vanilla script/xpt-to-csv.r $DECOMPRESSED_FILE "$DECOMPRESSED_FILE.csv"
+  head -n 100 "$DECOMPRESSED_FILE.csv" > "$DECOMPRESSED_FILE.snapshot"
+}
+
+process_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2003-2004/PAXRAW_C.ZIP" "PAXRAW_C.ZIP"
+process_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2005-2006/PAXRAW_D.ZIP" "PAXRAW_D.ZIP"
+
+echo "==> Verifying data integrity..."
+sha256sum -c data/sha256sum.txt
+
+echo $'\nData was downloaded successfully\n'
