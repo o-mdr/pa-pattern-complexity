@@ -2,6 +2,8 @@
 
 This project came up from my PhD research at Glasgow Caledonian University. It contains source code for analysis of objectively measured physical activity.
 
+[![CircleCI](https://circleci.com/gh/o-mdr/pa-pattern-complexity/tree/master.svg?style=svg)](https://circleci.com/gh/o-mdr/pa-pattern-complexity/tree/master)
+
 ## Getting Started
 
 Tested on Ubuntu 20.04 LTS system, you may need to adjust scripts for other platforms
@@ -46,6 +48,7 @@ TBD
 ## Built With
 
 - [R](https://cran.r-project.org/) - Statistical computing and graphics environment
+- [CircleCI](https://app.circleci.com/pipelines/github/o-mdr/pa-pattern-complexity) - CI server
 
 ## Contributing
 
