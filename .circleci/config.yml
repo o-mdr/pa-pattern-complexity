@@ -5,6 +5,10 @@ jobs:
   build-test-job:
     docker:
       - image: microsoft/dotnet:latest
+        auth:
+            username: $DOCKERHUB_USERNAME
+            password: $DOCKERHUB_PASSWORD
+    working_directory: /app
     steps:
       - checkout
       # TODO add support for building
@@ -12,7 +16,7 @@ jobs:
       #     working_directory: ~/project/App.Tests
       #     name: Run tests
       #     command: |
-      #       dotnet test
+      #       dotnet tests
 workflows:
   build-test-workflow:
     jobs:
