@@ -13,6 +13,7 @@ sudo ./script/bootstrap
 The following data sources are used in this project:
 - [NHANES 2003 - 2004 PAM](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Examination&CycleBeginYear=2003)
 - [NHANES 2005 - 2006 PAM](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Examination&CycleBeginYear=2005)
+- [NHANES 2011 - 2012 PAM](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Examination&CycleBeginYear=2011)
 
 ```bash
 # To download the data on your machine

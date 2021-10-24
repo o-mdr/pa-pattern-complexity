@@ -6,6 +6,30 @@ set -Eeou pipefail
 
 cd "$(dirname "$0")/.." || exit
 
+# Download zip file, unzip, convert xpt to csv,
+# create a snapshot - make a file with first 100 lines
+process_compressed_nhanes_file() {
+  URL=$1
+  SOURCE="data/$2"
+  echo "==> Downloading NHANES Physical Activity Monitoring data ($SOURCE)..."
+  if [ ! -f "$SOURCE" ]; then
+    curl -LS $URL -o "$SOURCE"
+    echo "    Done"
+    echo "    Unzipping data"
+    unzip -fqq "$SOURCE" -d "data"
+
+    echo "    Converting XPT to CSV format"
+    DECOMPRESSED_FILE="data/$(unzip -Z -1 $SOURCE)"
+    Rscript --vanilla script/xpt-to-csv.r $DECOMPRESSED_FILE "$DECOMPRESSED_FILE.csv"
+    head -n 100 "$DECOMPRESSED_FILE.csv" >"$DECOMPRESSED_FILE.snapshot"
+  else
+    echo "    File $SOURCE already exist, assuming all processing is done"
+  fi
+
+}
+
+# Download xpt file, convert xpt to csv,
+# create a snapshot - make a file with first 100 lines
 process_nhanes_file() {
   URL=$1
   SOURCE="data/$2"
@@ -13,21 +37,17 @@ process_nhanes_file() {
   if [ ! -f "$SOURCE" ]; then
     curl -LS $URL -o "$SOURCE"
     echo "    Done"
+    Rscript --vanilla script/xpt-to-csv.r "$SOURCE" "$SOURCE.csv"
+    head -n 100 "$SOURCE.csv" >"$SOURCE.snapshot"
   else
-    echo "    File $SOURCE already exist and will be re-used"
+    echo "    File $SOURCE already exist, assuming all processing is done"
   fi
-
-  echo "    Unzipping data"
-  unzip -fqq "$SOURCE" -d "data"
-
-  echo "    Converting XPT to CSV format"
-  DECOMPRESSED_FILE="data/$(unzip -Z -1 $SOURCE)"
-  Rscript --vanilla script/xpt-to-csv.r $DECOMPRESSED_FILE "$DECOMPRESSED_FILE.csv"
-  head -n 100 "$DECOMPRESSED_FILE.csv" > "$DECOMPRESSED_FILE.snapshot"
 }
 
-process_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2003-2004/PAXRAW_C.ZIP" "PAXRAW_C.ZIP"
-process_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2005-2006/PAXRAW_D.ZIP" "PAXRAW_D.ZIP"
+process_compressed_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2003-2004/PAXRAW_C.ZIP" "PAXRAW_C.ZIP"
+process_compressed_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2005-2006/PAXRAW_D.ZIP" "PAXRAW_D.ZIP"
+
+process_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2011-2012/PAXMIN_G.XPT" "PAXMIN_G.XPT"
 
 echo "==> Verifying data integrity..."
 sha256sum -c data/sha256sum.txt
