@@ -20,4 +20,5 @@ jobs:
 workflows:
   build-test-workflow:
     jobs:
-      - build-test-job
+      - build-test-job:
+          context: omdr
