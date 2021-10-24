@@ -1,10 +1,16 @@
 # https://app.circleci.com/pipelines/github/o-mdr/pa-pattern-complexity
 version: 2.1
 
+workflows:
+  build_test_workflow:
+    jobs:
+      - build_test_job:
+          context: omdr
+
 jobs:
-  build-test-job:
+  build_test_job:
     docker:
-      - image: microsoft/dotnet:latest
+      - image: gcc:10.2
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
@@ -17,8 +23,4 @@ jobs:
       #     name: Run tests
       #     command: |
       #       dotnet tests
-workflows:
-  build-test-workflow:
-    jobs:
-      - build-test-job:
-          context: omdr
+
