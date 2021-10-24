@@ -6,8 +6,8 @@ jobs:
     docker:
       - image: microsoft/dotnet:latest
         auth:
-            username: $DOCKERHUB_USERNAME
-            password: $DOCKERHUB_PASSWORD
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     working_directory: /app
     steps:
       - checkout
