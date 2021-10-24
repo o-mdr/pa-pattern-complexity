@@ -48,6 +48,7 @@ process_compressed_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2003-2004/PAXRA
 process_compressed_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2005-2006/PAXRAW_D.ZIP" "PAXRAW_D.ZIP"
 
 process_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2011-2012/PAXMIN_G.XPT" "PAXMIN_G.XPT"
+process_nhanes_file "https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/PAXMIN_H.XPT" "PAXMIN_H.XPT"
 
 echo "==> Verifying data integrity..."
 sha256sum -c data/sha256sum.txt
