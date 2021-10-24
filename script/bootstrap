@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Install dependencies that the application requires for building and running.
+# Tested on Ubuntu machine
+
+if [ $(id -u) != 0 ]; then
+    echo "This script requires sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
+
+cd "$(dirname "$0")/.."
+
+echo "==> Installing r-project key for software installation"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+
+echo "==> Updating..."
+apt-get -qq update;
+
+echo "==> Installing required packages"
+apt-get install -yqq \
+  unzip \
+  curl \
+  gnupg2 \
+  git \
+  shellcheck \
+  r-base
+
+echo "Bootstraping is done"
