@@ -1,0 +1,47 @@
+version: 2.1
+jobs:
+  # Building with GCC
+  build_job_gcc:
+    docker:
+      - image: gcc:10.2
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+    working_directory: /pa-pattern-complexity
+    steps:
+      - checkout
+      - run:
+          name: Run CI script
+          command: sh script/cibuild
+      - store_test_results:
+          path: builddir/meson-logs
+      - store_artifacts:
+          path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
+          destination: cm.tar.gz
+
+  # Building with clang
+  build_job_clang:
+    docker:
+      - image: silkeh/clang:10
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+    working_directory: /pa-pattern-complexity
+    steps:
+      - checkout
+      - run:
+          name: Run CI script
+          command: sh script/cibuild
+      - store_test_results:
+          path: builddir/meson-logs
+      - store_artifacts:
+          path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
+          destination: cm.tar.gz
+
+workflows:
+  build_workflow:
+    jobs:
+      - build_job_clang:
+          context: omdr
+      - build_job_gcc:
+          context: omdr
