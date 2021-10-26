@@ -1,56 +1,32 @@
 // Splits large NHANES csv file into multiple small files.
 // One file per subject id
 
-#include <algorithm>  // std::find
 #include <filesystem> // std::filesystem
 #include <fstream>    // std::ifstream
+#include <iomanip>    // setprecision
 #include <iostream>   // std::cout
+#include <sys/stat.h> // stat
+
+#include "arg_parser.h"
 
 namespace fs = std::filesystem;
 
-// Command line arg parsing
-// Based on https://stackoverflow.com/a/868894/706456
-char *get_arg(char **begin, char **end, const std::string &option) {
-  auto it = std::find(begin, end, option);
-  if (it != end && ++it != end)
-    return *it;
-  return nullptr;
+long file_size(const std::string &filename) {
+  struct stat st;
+  int rc = stat(filename.c_str(), &st);
+  return rc == 0 ? st.st_size : -1;
 }
 
-bool arg_exists(char **begin, char **end, const std::string &option) {
-  return std::find(begin, end, option) != end;
-}
+#define B_TO_KB(x) ((size_t)(x) >> 10)
+#define B_TO_MB(x) ((size_t)(x) >> 20)
+#define B_TO_GB(x) ((size_t)(x) >> 30)
 
-void print_help() {
-  std::cout
-      << "This program splits large NHANES csv file into multiple small files.\n"
-      << "Arguments: \n"
-      << "  -f        path to the single large csv file\n"
-      << "  -o        path to the destination directory where smaller files will be written\n"
-      << "Example usage: \n"
-      << "  Linux:    ./nhanes-csv-split   -f \"data/paxraw_c.xpt.csv\" -o \"data/study-c\"\n"
-      << "  Windows:  nhanes-csv-split.exe -f \"data\\paxraw_c.xpt.csv\" -o \"data\\study-c\"\n";
-}
-
-// Main
 int main(int argc, char **argv) {
+  arg_parser args;
+  args.validate(argc, argv);
 
-  // Arg validation
-  if (argc == 1 || arg_exists(argv, argv + argc, "-h")) {
-    print_help();
-    exit(EXIT_SUCCESS);
-  }
-  if (!arg_exists(argv, argv + argc, "-f")) {
-    std::cout << "-f argument is missing. See usage with -h argument.";
-    exit(EXIT_SUCCESS);
-  }
-  if (!arg_exists(argv, argv + argc, "-o")) {
-    std::cout << "-o argument is missing. See usage with -h argument.";
-    exit(EXIT_SUCCESS);
-  }
-
-  std::string input_file_path(get_arg(argv, argv + argc, "-f"));
-  std::string output_dir(get_arg(argv, argv + argc, "-o"));
+  std::string input_file_path(args.get_arg(argv, argv + argc, "-f"));
+  std::string output_dir(args.get_arg(argv, argv + argc, "-o"));
 
   std::string line;
   std::ifstream in_stream;
@@ -70,18 +46,28 @@ int main(int argc, char **argv) {
     }
   }
 
+  std::cout << "Begin splitting: " << input_file_path << "\n";
   std::string header_line;
   std::getline(in_stream, header_line);
-  std::cout << "Header line:\n" << header_line << "\n";
+  std::cout << "Header line: " << header_line << "\n";
 
   std::string cur_id;
   std::string new_id;
 
+  long number_of_out_files = 0;
+  long processed_size = 0;
+  long input_size = file_size(input_file_path);
+  if (input_size < 0) {
+    std::cout << "Failed to get input file size";
+    exit(EXIT_FAILURE);
+  }
+
+  processed_size += header_line.length() * sizeof(char);
+
   std::ofstream *out_stream = nullptr;
 
   while (std::getline(in_stream, line)) {
-
-
+    processed_size += line.length() * sizeof(char);
     size_t first_comma = line.find_first_of(",");
     if (first_comma == std::string::npos)
       continue;
@@ -112,10 +98,21 @@ int main(int argc, char **argv) {
           exit(EXIT_FAILURE);
         }
         *out_stream << header_line << "\n";
+        number_of_out_files++;
+
+        if (number_of_out_files % 50 == 0) {
+          std::cout << "Created " << number_of_out_files << " files, "
+                    << "processed " << B_TO_MB(processed_size) << " / " << B_TO_MB(input_size)
+                    << " MB (" << std::setprecision(3) << ((double)processed_size * 100 / input_size) << "%)"
+                    << std::endl;
+        }
       }
     }
     *out_stream << line << "\n";
   }
 
+
+  std::cout << "Generated " << number_of_out_files << " files.\n";
+  std::cout << "Convertsion is finised, see your data in: " << output_dir << ".\n";
   return 0;
 }

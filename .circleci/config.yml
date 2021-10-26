@@ -11,6 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Run bootstrap
+          command: sh script/bootstrap
+      - run:
           name: Run CI script
           command: sh script/cibuild
       - store_test_results:
@@ -29,6 +32,9 @@ jobs:
     working_directory: /pa-pattern-complexity
     steps:
       - checkout
+      - run:
+          name: Run bootstrap
+          command: sh script/bootstrap
       - run:
           name: Run CI script
           command: sh script/cibuild

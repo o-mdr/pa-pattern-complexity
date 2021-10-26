@@ -34,4 +34,11 @@ apt-get -y install clang clang-format
 echo "==> Installing meson..."
 pip3 install --upgrade meson
 
+echo "==> Reloading profile file"
+. ~/.profile
+export PATH=$PATH:$HOME/.local/bin
+
+echo "==> Setting up meson environment"
+meson setup builddir
+
 echo "Bootstraping is done"

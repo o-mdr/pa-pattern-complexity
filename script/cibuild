@@ -14,8 +14,7 @@ COMPRESSED_ARTIFACTS=$BUILD_DIR/compressed-artifacts
 
 cd $ROOT
 
-echo "==> Calling bootsrap..."
-./script/bootstrap
+echo "==> Updating path..."
 export PATH=$PATH:$HOME/.local/bin
 
 echo "==> Running meson steps..."

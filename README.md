@@ -28,12 +28,15 @@ The following data sources are used in this project:
 ### Running the build
 
 ```bash
+meson setup builddir
 meson compile -C builddir
 ```
 
-## Running the tests
+## Running nhanes-csv-split
 
-TBD
+```bash
+./builddir/nhanes-csv-split -f "data/paxraw_c.xpt.csv" -o "data/study-c"
+```
 
 ### Break down into end to end tests
 
