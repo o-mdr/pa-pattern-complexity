@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: Run CI script
-          command: sh scripts/cibuild
+          command: sh script/cibuild
       - store_test_results:
           path: builddir/meson-logs
       - store_artifacts:
@@ -31,7 +31,7 @@ jobs:
       - checkout
       - run:
           name: Run CI script
-          command: sh scripts/cibuild
+          command: sh script/cibuild
       - store_test_results:
           path: builddir/meson-logs
       - store_artifacts:
