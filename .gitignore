@@ -5,5 +5,4 @@ subprojects
 # But not wrap files in subprojects
 !subprojects/*.wrap
 
-# Static code analysers
-cov-int
+src/nhanes-csv-split/main
