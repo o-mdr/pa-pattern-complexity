@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# scripts/cibuild: Run build on CI server
+
+set -eu
+
+ROOT="$(dirname "$0")/.."
+BUILD_DIR=builddir
+PROJ_NAME=pa-pattern-complexity
+ARTIFACTS_ROOT=$BUILD_DIR/artifacts
+ARTIFACTS=$ARTIFACTS_ROOT/$PROJ_NAME
+ARTIFACTS_BIN=$ARTIFACTS/bin
+COMPRESSED_ARTIFACTS=$BUILD_DIR/compressed-artifacts
+
+cd $ROOT
+
+echo "==> Calling bootsrap..."
+./script/bootstrap
+export PATH=$PATH:$HOME/.local/bin
+
+echo "==> Running meson steps..."
+rm -rf $BUILD_DIR
+meson setup $BUILD_DIR
+meson compile -C $BUILD_DIR
+meson test -C $BUILD_DIR
+
+echo "==> Collecting artifacts..."
+mkdir -p $ARTIFACTS_BIN $COMPRESSED_ARTIFACTS
+
+cp $BUILD_DIR/nhanes-csv-split $ARTIFACTS_BIN
+
+echo "==> Compressing artifacts..."
+tar -czvf $COMPRESSED_ARTIFACTS/$PROJ_NAME.tar.gz -C $ARTIFACTS_ROOT $PROJ_NAME
+
+cd $ROOT
+
+echo "CI build is done"
