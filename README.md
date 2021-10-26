@@ -1,6 +1,6 @@
 # Physical activity pattern complexity analysis
 
-This project came up from my PhD research at Glasgow Caledonian University. It contains source code for analysis of objectively measured physical activity.
+This project came up from [my PhD research](<doc/OM PhD thesis.pdf>) at Glasgow Caledonian University. It contains source code for analysis of objectively measured physical activity.
 
 [![CircleCI](https://circleci.com/gh/o-mdr/pa-pattern-complexity/tree/master.svg?style=svg)](https://circleci.com/gh/o-mdr/pa-pattern-complexity/tree/master)
 
@@ -25,9 +25,11 @@ The following data sources are used in this project:
 - [NHANES 2011 - 2012 PAM](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Examination&CycleBeginYear=2011)
 - [NHANES 2013 - 2014 PAM](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Examination&CycleBeginYear=2013)
 
-### Installing
+### Running the build
 
-TBD
+```bash
+meson compile -C builddir
+```
 
 ## Running the tests
 
