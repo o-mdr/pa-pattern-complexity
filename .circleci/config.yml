@@ -1,26 +1,47 @@
-# https://app.circleci.com/pipelines/github/o-mdr/pa-pattern-complexity
 version: 2.1
-
-workflows:
-  build_test_workflow:
-    jobs:
-      - build_test_job:
-          context: omdr
-
 jobs:
-  build_test_job:
+  # Building with GCC
+  build_job_gcc:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0
+      - image: gcc:10.2
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
-    working_directory: /app
+    working_directory: /cm
     steps:
       - checkout
-      # TODO add support for building
-      # - run:
-      #     working_directory: ~/project/App.Tests
-      #     name: Run tests
-      #     command: |
-      #       dotnet tests
+      - run:
+          name: Run CI script
+          command: sh scripts/cibuild
+      - store_test_results:
+          path: builddir/meson-logs
+      - store_artifacts:
+          path: builddir/compressed-artifacts/cm.tar.gz
+          destination: cm.tar.gz
 
+  # Building with clang
+  build_job_clang:
+    docker:
+      - image: silkeh/clang:10
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+    working_directory: /cm
+    steps:
+      - checkout
+      - run:
+          name: Run CI script
+          command: sh scripts/cibuild
+      - store_test_results:
+          path: builddir/meson-logs
+      - store_artifacts:
+          path: builddir/compressed-artifacts/cm.tar.gz
+          destination: cm.tar.gz
+
+workflows:
+  build_workflow:
+    jobs:
+      - build_job_clang:
+          context: omdr
+      - build_job_gcc:
+          context: omdr
