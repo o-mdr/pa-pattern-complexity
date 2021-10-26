@@ -21,7 +21,7 @@ process_compressed_nhanes_file() {
     echo "    Converting XPT to CSV format"
     DECOMPRESSED_FILE="data/$(unzip -Z -1 $SOURCE)"
     Rscript --vanilla script/xpt-to-csv.r $DECOMPRESSED_FILE "$DECOMPRESSED_FILE.csv"
-    head -n 100 "$DECOMPRESSED_FILE.csv" >"$DECOMPRESSED_FILE.snapshot"
+    head -n 100 "$DECOMPRESSED_FILE.csv" >"$DECOMPRESSED_FILE.csv.snapshot"
   else
     echo "    File $SOURCE already exist, assuming all processing is done"
   fi
