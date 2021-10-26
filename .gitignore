@@ -5,4 +5,11 @@ subprojects
 # But not wrap files in subprojects
 !subprojects/*.wrap
 
+# data and large files
+data/PAXMIN*
+data/paxraw*
+data/PAXRAW*
+data/study-*
+
+# C++ executable used in debugging
 src/nhanes-csv-split/main
