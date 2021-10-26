@@ -7,7 +7,7 @@ jobs:
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
-    working_directory: /cm
+    working_directory: /pa-pattern-complexity
     steps:
       - checkout
       - run:
@@ -16,7 +16,7 @@ jobs:
       - store_test_results:
           path: builddir/meson-logs
       - store_artifacts:
-          path: builddir/compressed-artifacts/cm.tar.gz
+          path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: cm.tar.gz
 
   # Building with clang
@@ -26,7 +26,7 @@ jobs:
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
-    working_directory: /cm
+    working_directory: /pa-pattern-complexity
     steps:
       - checkout
       - run:
@@ -35,7 +35,7 @@ jobs:
       - store_test_results:
           path: builddir/meson-logs
       - store_artifacts:
-          path: builddir/compressed-artifacts/cm.tar.gz
+          path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: cm.tar.gz
 
 workflows:
