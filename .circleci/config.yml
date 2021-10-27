@@ -18,7 +18,7 @@ jobs:
           command: sh script/cibuild
       - run:
           name: Compress source code
-          command: tar --exclude='builddir' -cvzf src.tar .
+          command: tar --warning=no-file-changed --exclude='builddir' -cvzf src.tar .
       - store_artifacts:
           path: src.tar
       - store_test_results:
