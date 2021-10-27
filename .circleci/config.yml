@@ -22,7 +22,7 @@ jobs:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: pa-pattern-complexity.tar.gz
       - store_artifacts:
-          path: builddir/compressed-artifacts/pa-pattern-complexity.src.tar.g
+          path: builddir/compressed-artifacts/pa-pattern-complexity.src.tar.gz
           destination: pa-pattern-complexity.src.tar.gz
 
   # Building with clang
