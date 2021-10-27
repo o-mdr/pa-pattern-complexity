@@ -36,6 +36,9 @@ meson compile -C builddir
 
 ```bash
 ./builddir/nhanes-csv-split -f "data/paxraw_c.xpt.csv" -o "data/study-c"
+./builddir/nhanes-csv-split -f "data/paxraw_d.xpt.csv" -o "data/study-d"
+./builddir/nhanes-csv-split -f "data/PAXMIN_G.XPT.csv" -o "data/study-g"
+./builddir/nhanes-csv-split -f "data/PAXMIN_H.XPT.csv" -o "data/study-h"
 ```
 
 ### Break down into end to end tests
