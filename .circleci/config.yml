@@ -16,13 +16,14 @@ jobs:
       - run:
           name: Run CI script
           command: sh script/cibuild
-      - store_artifacts:
-          path: src.tar.gz
       - store_test_results:
           path: builddir/meson-logs
       - store_artifacts:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: pa-pattern-complexity.tar.gz
+      - store_artifacts:
+          path: builddir/compressed-artifacts/pa-pattern-complexity.src.tar.g
+          destination: pa-pattern-complexity.src.tar.gz
 
   # Building with clang
   build_job_clang:
