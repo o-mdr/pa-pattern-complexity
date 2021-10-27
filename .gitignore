@@ -1,6 +1,7 @@
 # Temp build stuff
 builddir*
 subprojects
+src.tar.gz
 
 # But not wrap files in subprojects
 !subprojects/*.wrap
@@ -13,3 +14,4 @@ data/study-*
 
 # C++ executable used in debugging
 src/nhanes-csv-split/main
+

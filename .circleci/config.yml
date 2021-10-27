@@ -16,11 +16,8 @@ jobs:
       - run:
           name: Run CI script
           command: sh script/cibuild
-      - run:
-          name: Compress source code
-          command: tar --warning=no-file-changed --exclude='builddir' -cvzf src.tar .
       - store_artifacts:
-          path: src.tar
+          path: src.tar.gz
       - store_test_results:
           path: builddir/meson-logs
       - store_artifacts:
