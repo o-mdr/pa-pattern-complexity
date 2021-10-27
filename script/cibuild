@@ -29,8 +29,8 @@ mkdir -p $ARTIFACTS_BIN $COMPRESSED_ARTIFACTS
 cp $BUILD_DIR/nhanes-csv-split $ARTIFACTS_BIN
 
 echo "==> Compressing artifacts..."
-tar -czvf $COMPRESSED_ARTIFACTS/$PROJ_NAME.tar.gz -C $ARTIFACTS_ROOT $PROJ_NAME
-tar -cvzf --exclude='builddir' --exclude='data' src.tar.gz .
+tar -czf $COMPRESSED_ARTIFACTS/$PROJ_NAME.tar.gz -C $ARTIFACTS_ROOT $PROJ_NAME
+tar --exclude="./builddir" --exclude="./data" -czf $COMPRESSED_ARTIFACTS/$PROJ_NAME.src.tar.gz .
 
 cd $ROOT
 
