@@ -53,9 +53,7 @@ jobs:
 
   # Building with MSVC
   build_job_msvc:
-    executor:
-      name: win/default
-      shell: powershell.exe
+    executor: win/default
     steps:
       - checkout
       - run: systeminfo
