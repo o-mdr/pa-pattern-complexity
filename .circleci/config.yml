@@ -47,6 +47,22 @@ jobs:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: pa-pattern-complexity.tar.gz
 
+  # Building with MSVC
+  build_job_msvc:
+    executor:
+      name: win/default
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Run CI script"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+
+
 workflows:
   build_workflow:
     jobs:
