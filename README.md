@@ -32,31 +32,15 @@ meson setup builddir
 meson compile -C builddir
 ```
 
-## Running nhanes-csv-split
+## Running data cleanup
 
-```bash
-./builddir/nhanes-csv-split -f "data/paxraw_c.xpt.csv" -o "data/study-c"
-./builddir/nhanes-csv-split -f "data/paxraw_d.xpt.csv" -o "data/study-d"
-./builddir/nhanes-csv-split -f "data/PAXMIN_G.XPT.csv" -o "data/study-g"
-./builddir/nhanes-csv-split -f "data/PAXMIN_H.XPT.csv" -o "data/study-h"
-```
-
-### Break down into end to end tests
-
-TBD
-
-### And coding style tests
-
-TBD
-
-## Deployment
-
-TBD
+Described in [NHANES Data cleanup](doc/NHANES-Data-cleanup.md).
 
 ## Built With
 
 - [R](https://cran.r-project.org/) - Statistical computing and graphics environment
 - [CircleCI](https://app.circleci.com/pipelines/github/o-mdr/pa-pattern-complexity) - CI server
+- [Meson](https://mesonbuild.com) - modern C++ build tool
 
 ## Contributing
 

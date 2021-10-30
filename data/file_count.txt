@@ -1,0 +1,5 @@
+Count of files: 
+Study C (data/study-c): 7176 
+Study D (data/study-d): 7455 
+Study G (data/study-g): 6917 
+Study H (data/study-h): 7776 
