@@ -17,9 +17,9 @@ long file_size(const std::string &filename) {
   return rc == 0 ? st.st_size : -1;
 }
 
-#define B_TO_KB(x) ((size_t)(x) >> 10)
-#define B_TO_MB(x) ((size_t)(x) >> 20)
-#define B_TO_GB(x) ((size_t)(x) >> 30)
+#define B_TO_KB(x) (static_cast<size_t>(x) >> 10)
+#define B_TO_MB(x) (static_cast<size_t>(x) >> 20)
+#define B_TO_GB(x) (static_cast<size_t>(x) >> 30)
 
 int main(int argc, char **argv) {
   arg_parser args;
