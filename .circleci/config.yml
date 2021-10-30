@@ -55,14 +55,11 @@ jobs:
   build_job_msvc:
     executor: win/default
     steps:
-      - checkout
-      - run: systeminfo
+      - checkout  
       - run:
-          name: "Run CI script"
+          name: "Run bootstrap"
           shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
+          command: -File script/bootstrap.ps1
 
 
 workflows:
