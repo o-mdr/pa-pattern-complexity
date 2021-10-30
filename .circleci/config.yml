@@ -66,6 +66,8 @@ jobs:
 workflows:
   build_workflow:
     jobs:
+      - build_job_msvc:
+          context: omdr
       - build_job_clang:
           context: omdr
       - build_job_gcc:
