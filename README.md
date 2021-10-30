@@ -36,7 +36,6 @@ meson compile -C builddir
 
 Described in [NHANES Data cleanup](doc/NHANES-Data-cleanup.md).
 
-
 ## Built With
 
 - [R](https://cran.r-project.org/) - Statistical computing and graphics environment

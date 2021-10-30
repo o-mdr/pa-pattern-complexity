@@ -34,7 +34,8 @@ int main(int argc, char **argv) {
 
   if (!in_stream.good()) {
     perror("Failed to open input file for reading");
-    std::cout << "Current working directory: " << std::filesystem::current_path();
+    std::cout << "Current working directory: " << std::filesystem::current_path() << "\n"
+    << "Input file: " << input_file_path << "\n";
     exit(EXIT_FAILURE);
   }
   if (!fs::exists(output_dir)) {
@@ -103,14 +104,13 @@ int main(int argc, char **argv) {
         if (number_of_out_files % 50 == 0) {
           std::cout << "Created " << number_of_out_files << " files, "
                     << "processed " << B_TO_MB(processed_size) << " / " << B_TO_MB(input_size)
-                    << " MB (" << std::setprecision(3) << ((double)processed_size * 100 / input_size) << "%)"
-                    << std::endl;
+                    << " MB (" << std::setprecision(3)
+                    << ((double)processed_size * 100 / input_size) << "%)" << std::endl;
         }
       }
     }
     *out_stream << line << "\n";
   }
-
 
   std::cout << "Generated " << number_of_out_files << " files.\n";
   std::cout << "Convertsion is finised, see your data in: " << output_dir << ".\n";
