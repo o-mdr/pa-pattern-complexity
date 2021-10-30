@@ -55,11 +55,11 @@ jobs:
   build_job_msvc:
     executor: win/default
     steps:
-      - checkout  
+      - checkout
       - run:
           name: "Run bootstrap"
           shell: powershell.exe
-          command: -File script/bootstrap.ps1
+          command: script/bootstrap.ps1
 
 
 workflows:

@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
           std::cout << "Created " << number_of_out_files << " files, "
                     << "processed " << B_TO_MB(processed_size) << " / " << B_TO_MB(input_size)
                     << " MB (" << std::setprecision(3)
-                    << ((double)processed_size * 100 / input_size) << "%)" << std::endl;
+                    << (static_cast<double>(processed_size) * 100 / input_size) << "%)" << std::endl;
         }
       }
     }
