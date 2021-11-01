@@ -67,16 +67,15 @@ jobs:
           name: Bootstrap with Cygwin
           shell: C:\\cygwin64\\bin\\bash.exe --login -eo pipefail
           command: |
-            CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
-            pwd
-            ls -alh
-            ls -alh /
-            ls -alh /cygdrive
-            cd $CIRCLE_WORKING_DIRECTORY
+            # location of the checked-out code
+            cd c:/Users/circleci/project
             ./script/bootstrap
       - run:
           name: Run CI script
-          command: ./script/cibuild
+          command: |
+            # location of the checked-out code
+            cd c:/Users/circleci/project
+            ./script/cibuild
       - store_artifacts:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: pa-pattern-complexity.tar.gz
@@ -86,7 +85,7 @@ workflows:
     jobs:
       - build_job_msvc:
           context: omdr
-      - build_job_clang:
-          context: omdr
-      - build_job_gcc:
-          context: omdr
+      # - build_job_clang:
+      #     context: omdr
+      # - build_job_gcc:
+      #     context: omdr
