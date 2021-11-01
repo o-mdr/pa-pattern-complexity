@@ -67,6 +67,10 @@ jobs:
           name: Bootstrap with Cygwin
           shell: C:\\cygwin64\\bin\\bash.exe --login -eo pipefail
           command: |
+            echo 'cygstart --action=runas "$@"' > ~/bin/sudo
+            chmod +x ~/bin/sudo
+            PATH=$HOME/bin:$PATH
+
             # location of the checked-out code
             cd c:/Users/circleci/project
             sudo ./script/bootstrap
