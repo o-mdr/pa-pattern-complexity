@@ -68,13 +68,13 @@ jobs:
           shell: C:\\cygwin64\\bin\\bash.exe --login -eo pipefail
           command: |
             # location of the checked-out code
-            cd "c:/Users/circleci/$CIRCLE_WORKING_DIRECTORY"
+            cd c:/Users/circleci/project
             ./script/bootstrap
       - run:
           name: Run CI script
           command: |
             # location of the checked-out code
-            cd "c:/Users/circleci/$CIRCLE_WORKING_DIRECTORY"
+            cd c:/Users/circleci/project
             ./script/cibuild
       - store_artifacts:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
