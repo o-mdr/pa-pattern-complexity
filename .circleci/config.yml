@@ -69,7 +69,7 @@ jobs:
           command: |
             # location of the checked-out code
             cd c:/Users/circleci/project
-            ./script/bootstrap
+            sudo ./script/bootstrap
       - run:
           name: Run CI script
           command: |
