@@ -73,7 +73,7 @@ jobs:
 
             # location of the checked-out code
             cd c:/Users/circleci/project
-            cygstart --action=runas "bash script/bootstrap"
+            cygstart --action=runas "bash script\\bootstrap"
       - run:
           name: Run CI script
           command: |
