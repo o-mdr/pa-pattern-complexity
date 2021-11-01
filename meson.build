@@ -28,8 +28,8 @@ if [compiler_gcc, compiler_clang].contains(cxx_id)
   common_warning_flags = [ '-Wpendantic', '-Wunused', '-Wconversion', '-Wundef',
     '-Wshadow', '-Wcast-align', '-Wcast-qual', '-Wold-style-cast',
     '-Wpointer-arith', '-Wmissing-prototypes',
-    '-funroll-loops', '-fvectorize', '-fprofile-generate', '-fstack-protector-strong',
-    '-fno-rtti', '-ffunction-sections', '-fdata-sections', '-Wl', '–gc-sections'
+    '-funroll-loops', '-fvectorize', '-fstack-protector-strong',
+    '-fno-rtti', '-ffunction-sections', '-fdata-sections'
      ]
   if cxx_id == compiler_clang
     common_warning_flags += ['-Wno-sign-conversion', '-Wdocumentation']
