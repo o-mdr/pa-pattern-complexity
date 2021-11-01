@@ -70,7 +70,8 @@ jobs:
             CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
             pwd
             ls -alh
-            ls -alh project
+            ls -alh /
+            ls -alh /cygdrive
             cd $CIRCLE_WORKING_DIRECTORY
             ./script/bootstrap
       - run:
