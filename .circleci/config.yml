@@ -74,7 +74,7 @@ jobs:
 
             # location of the checked-out code
             cd c:/Users/circleci/project
-            bash script/cibuild
+            script/cibuild
       # - run:
       #     name: Run CI script
       #     command: |
