@@ -59,20 +59,20 @@ jobs:
       - run:
           name: Download VS Build tools
           shell: bash.exe
-          command: curl -sSJL "https://aka.ms/vs/16/release/vs_buildtools.exe" -o "C:/TEMP/vs_buildtools.exe"
+          command: curl -sSJOL "https://aka.ms/vs/16/release/vs_buildtools.exe"
       - run:
           name: Install msvc C++ build tools
-          command: C:/TEMP/vs_buildtools.exe --quiet --wait --norestart --nocache       `
+          command: .\vs_buildtools.exe --quiet --wait --norestart --nocache             `
                     --channelUri "https://aka.ms/vs/16/release/channel"                 `
-                    --installChannelUri "C:/TEMP/VisualStudio.chman"                    `
+                    --installChannelUri "https://aka.ms/vs/16/release/channel"                    `
                     --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended  `
-                    --installPath "C:/BuildTools"
+                    --installPath "C:\BuildTools"
       - run:
           name: Compile
           shell: powershell.exe
           command: |
             C:\BuildTools\Common7\Tools\VsDevCmd.bat
-            cd c:/Users/circleci/project
+            cd c:\Users\circleci\project
             buildtoolsmsvc msbuild /?
       - store_artifacts:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
