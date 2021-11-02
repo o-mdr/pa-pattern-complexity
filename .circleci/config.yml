@@ -62,10 +62,10 @@ jobs:
           command: curl -sSJOL "https://aka.ms/vs/16/release/vs_buildtools.exe"
       - run:
           name: Install msvc C++ build tools
-          command: vs_buildtools.exe --quiet --wait --norestart --nocache \
-                    --channelUri "https://aka.ms/vs/16/release/channel"
-                    --installChannelUri "C:\TEMP\VisualStudio.chman \
-                    --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended \
+          command: vs_buildtools.exe --quiet --wait --norestart --nocache               `
+                    --channelUri "https://aka.ms/vs/16/release/channel"                 `
+                    --installChannelUri "C:\TEMP\VisualStudio.chman                     `
+                    --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended  `
                     --installPath "C:\BuildTools"
       - run:
           name: Compile
