@@ -73,7 +73,8 @@ jobs:
           command: |
             C:\BuildTools\Common7\Tools\VsDevCmd.bat
             cd c:\Users\circleci\project
-            buildtoolsmsvc msbuild /?
+            msbuild /?
+            cmake /?
       - store_artifacts:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: pa-pattern-complexity.tar.gz
