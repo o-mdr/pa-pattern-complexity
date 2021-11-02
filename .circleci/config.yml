@@ -67,6 +67,7 @@ jobs:
           name: Bootstrap with Cygwin
           shell: C:\\cygwin64\\bin\\bash.exe --login -eo pipefail
           command: |
+            set -m
             # echo 'cygstart --action=runas "$@"' > /home/circleci/bin/sudo
             # chmod +x /home/circleci/bin/sudo
             # PATH=/home/circleci/bin:$PATH
