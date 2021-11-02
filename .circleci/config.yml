@@ -64,7 +64,7 @@ jobs:
           name: Install msvc C++ build tools
           command: .\vs_buildtools.exe --quiet --wait --norestart --nocache             `
                     --channelUri "https://aka.ms/vs/16/release/channel"                 `
-                    --installChannelUri "https://aka.ms/vs/16/release/channel"                    `
+                    --installChannelUri "https://aka.ms/vs/16/release/channel"          `
                     --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended  `
                     --installPath "C:\BuildTools"
       - run:
