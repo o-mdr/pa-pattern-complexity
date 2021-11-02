@@ -70,16 +70,17 @@ jobs:
             # echo 'cygstart --action=runas "$@"' > /home/circleci/bin/sudo
             # chmod +x /home/circleci/bin/sudo
             # PATH=/home/circleci/bin:$PATH
+            set PATH=C:/cygwin64/bin;%PATH%
 
             # location of the checked-out code
             cd c:/Users/circleci/project
-            cygstart --action=runas "script/bootstrap"
-      - run:
-          name: Run CI script
-          command: |
-            # location of the checked-out code
-            cd c:/Users/circleci/project
-            ./script/cibuild
+            bash script/cibuild
+      # - run:
+      #     name: Run CI script
+      #     command: |
+      #       # location of the checked-out code
+      #       cd c:/Users/circleci/project
+      #       ./script/cibuild
       - store_artifacts:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: pa-pattern-complexity.tar.gz
