@@ -71,14 +71,14 @@ jobs:
           name: Compile
           shell: powershell.exe
           command: |
-            cd cd c:\Users\circleci\project\src\nhanes-csv-split
+            cd c:\Users\circleci\project\src\nhanes-csv-split
             C:\BuildTools\Common7\Tools\VsDevCmd.bat -arch=amd64
             cl.exe /O2 /GL /GS /Gs /Gt /guard:cf /guard:ehcont /Gw /Qspectre  `
                    /permissive- /std:c++20 /Wall /we /Feout"nhanes-csv-split-x64.exe" `
                    main.cpp
             7z a -tzip nhanes-csv-split.zip nhanes-csv-split-x64.exe
       - store_artifacts:
-          path: cd c:\Users\circleci\project\src\nhanes-csv-split\nhanes-csv-split.zip
+          path: c:\Users\circleci\project\src\nhanes-csv-split\nhanes-csv-split.zip
           destination: nhanes-csv-split.zip
 
 workflows:
