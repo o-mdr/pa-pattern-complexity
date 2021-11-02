@@ -65,19 +65,21 @@ jobs:
           command: .\vs_buildtools.exe --quiet --wait --norestart --nocache             `
                     --channelUri "https://aka.ms/vs/16/release/channel"                 `
                     --installChannelUri "https://aka.ms/vs/16/release/channel"          `
-                    --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended  `
+                    --add Microsoft.VisualStudio.Workload.VCTools                       `
                     --installPath "C:\BuildTools"
       - run:
           name: Compile
           shell: powershell.exe
           command: |
-            C:\BuildTools\Common7\Tools\VsDevCmd.bat
-            cd c:\Users\circleci\project
-            msbuild /?
-            cmake /?
+            cd cd c:\Users\circleci\project\src\nhanes-csv-split
+            C:\BuildTools\Common7\Tools\VsDevCmd.bat -arch=amd64
+            cl.exe /O2 /GL /GS /Gs /Gt /guard:cf /guard:ehcont /Gw /Qspectre  `
+                   /permissive- /std:c++20 /Wall /we /Feout"nhanes-csv-split-x64.exe" `
+                   main.cpp
+            7z a -tzip nhanes-csv-split.zip nhanes-csv-split-x64.exe
       - store_artifacts:
-          path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
-          destination: pa-pattern-complexity.tar.gz
+          path: cd c:\Users\circleci\project\src\nhanes-csv-split\nhanes-csv-split.zip
+          destination: nhanes-csv-split.zip
 
 workflows:
   build_workflow:
