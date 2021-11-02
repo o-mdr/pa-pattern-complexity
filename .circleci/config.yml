@@ -57,31 +57,23 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Download Cygwin installer
+          name: Download VS Build tools
           shell: bash.exe
-          command: curl -sSJOL https://cygwin.com/setup-x86_64.exe
+          command: curl -sSJOL "https://aka.ms/vs/16/release/vs_buildtools.exe"
       - run:
-          name: Install Cygwin and required packages
-          command: .\setup-x86_64.exe -q -s https://mirrors.kernel.org/sourceware/cygwin/ -P python3,meson,gcc-g++
+          name: Install msvc C++ build tools
+          command: vs_buildtools.exe --quiet --wait --norestart --nocache \
+                    --channelUri "https://aka.ms/vs/16/release/channel"
+                    --installChannelUri "C:\TEMP\VisualStudio.chman \
+                    --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended \
+                    --installPath "C:\BuildTools"
       - run:
-          name: Bootstrap with Cygwin
-          shell: C:\\cygwin64\\bin\\bash.exe --login -eo pipefail
+          name: Compile
+          shell: powershell.exe
           command: |
-            set -m
-            # echo 'cygstart --action=runas "$@"' > /home/circleci/bin/sudo
-            # chmod +x /home/circleci/bin/sudo
-            # PATH=/home/circleci/bin:$PATH
-            set PATH=C:/cygwin64/bin;%PATH%
-
-            # location of the checked-out code
+            C:\BuildTools\Common7\Tools\VsDevCmd.bat
             cd c:/Users/circleci/project
-            script/cibuild
-      # - run:
-      #     name: Run CI script
-      #     command: |
-      #       # location of the checked-out code
-      #       cd c:/Users/circleci/project
-      #       ./script/cibuild
+            buildtoolsmsvc msbuild /?
       - store_artifacts:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: pa-pattern-complexity.tar.gz
