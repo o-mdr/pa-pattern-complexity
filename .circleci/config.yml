@@ -75,10 +75,7 @@ jobs:
             cd c:\Users\circleci\project\src\nhanes-csv-split
             C:\BuildTools\Common7\Tools\VsDevCmd.bat -arch=amd64
             msbuild nhanes-csv-split.vcproj /p:configuration=release
-            "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\cl.exe" `
-                  /O2 /GL /GS /Gs /Gt /guard:cf /guard:ehcont /Gw /Qspectre  `
-                  /permissive- /std:c++20 /Wall /we /Feout"nhanes-csv-split-x64.exe" `
-                   main.cpp
+            "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\cl.exe" /O2 /GL /GS /Gs /Gt /guard:cf /guard:ehcont /Gw /Qspectre /permissive- /std:c++20 /Wall /we /Feout"nhanes-csv-split-x64.exe" main.cpp
             7z a -tzip nhanes-csv-split.zip nhanes-csv-split-x64.exe
       - store_artifacts:
           path: c:\Users\circleci\project\src\nhanes-csv-split\nhanes-csv-split.zip
