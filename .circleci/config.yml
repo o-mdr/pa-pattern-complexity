@@ -72,7 +72,7 @@ jobs:
           name: Compile
           shell: powershell.exe
           command: |
-            Get-ChildItem -Path C:\ -Filter cl.exe -Recurse -ErrorAction SilentlyContinue -Force/
+            Get-ChildItem -Path C:\ -Filter cl.exe -Recurse -ErrorAction SilentlyContinue -Force
             cd c:\Users\circleci\project\src\nhanes-csv-split
             $Env:Path.Split(';')
             C:\BuildTools\Common7\Tools\VsDevCmd.bat -arch=amd64
