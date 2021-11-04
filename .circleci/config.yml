@@ -66,11 +66,13 @@ jobs:
                     --channelUri "https://aka.ms/vs/16/release/channel"                 `
                     --installChannelUri "https://aka.ms/vs/16/release/channel"          `
                     --add Microsoft.VisualStudio.Workload.VCTools                       `
+                    --includeRecommended                                               `
                     --installPath "C:\BuildTools"
       - run:
           name: Compile
           shell: powershell.exe
           command: |
+            Get-ChildItem -Path C:\ -Filter cl.exe -Recurse -ErrorAction SilentlyContinue -Force/
             cd c:\Users\circleci\project\src\nhanes-csv-split
             $Env:Path.Split(';')
             C:\BuildTools\Common7\Tools\VsDevCmd.bat -arch=amd64
