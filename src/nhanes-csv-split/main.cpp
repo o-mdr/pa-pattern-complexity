@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
   if (!in_stream.good()) {
     perror("Failed to open input file for reading");
     std::cout << "Current working directory: " << std::filesystem::current_path() << "\n"
-    << "Input file: " << input_file_path << "\n";
+              << "Input file: " << input_file_path << "\n";
     exit(EXIT_FAILURE);
   }
   if (!fs::exists(output_dir)) {
@@ -63,12 +63,12 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-  processed_size += header_line.length() * sizeof(char);
+  processed_size += static_cast<long>(header_line.length()) * sizeof(char);
 
   std::ofstream *out_stream = nullptr;
 
   while (std::getline(in_stream, line)) {
-    processed_size += line.length() * sizeof(char);
+    processed_size += static_cast<long>(header_line.length()) * sizeof(char);
     size_t first_comma = line.find_first_of(",");
     if (first_comma == std::string::npos)
       continue;
@@ -104,8 +104,8 @@ int main(int argc, char **argv) {
         if (number_of_out_files % 50 == 0) {
           std::cout << "Created " << number_of_out_files << " files, "
                     << "processed " << B_TO_MB(processed_size) << " / " << B_TO_MB(input_size)
-                    << " MB (" << std::setprecision(3)
-                    << (processed_size * 100 / input_size) << "%)" << std::endl;
+                    << " MB (" << std::setprecision(3) << (processed_size * 100 / input_size)
+                    << "%)" << std::endl;
         }
       }
     }
