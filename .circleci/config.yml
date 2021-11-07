@@ -77,8 +77,8 @@ jobs:
             msbuild nhanes.vs.sln /p:Configuration=Release /p:Platform=x86
             & "C:\BuildTools\Common7\Tools\VsDevCmd.bat" "-arch=x64"
             msbuild nhanes.vs.sln /p:Configuration=Release /p:Platform=x64
-            & "7z" "a -tzip nhanes-csv-split.win-x86.zip Release\nhanes-csv-split.exe"
-            & "7z" "a -tzip nhanes-csv-split.win-x64.zip x64\Release\nhanes-csv-split.exe"
+            7z a -tzip nhanes-csv-split.win-x86.zip Release\nhanes-csv-split.exe
+            7z a -tzip nhanes-csv-split.win-x64.zip x64\Release\nhanes-csv-split.exe
       - store_artifacts:
           path: c:\Users\circleci\project\src\nhanes-csv-splitnhanes-csv-split.win-x86.zip
           destination: nhanes-csv-split.win-x86.zip
