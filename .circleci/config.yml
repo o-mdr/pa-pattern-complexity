@@ -66,7 +66,7 @@ jobs:
                     --channelUri "https://aka.ms/vs/16/release/channel"                 `
                     --installChannelUri "https://aka.ms/vs/16/release/channel"          `
                     --add Microsoft.VisualStudio.Workload.VCTools                       `
-                    --includeRecommended                                               `
+                    --includeRecommended                                                `
                     --installPath "C:\BuildTools"
       - run:
           name: Compile
@@ -80,7 +80,7 @@ jobs:
             7z a -tzip nhanes-csv-split.win-x86.zip Release\nhanes-csv-split.exe
             7z a -tzip nhanes-csv-split.win-x64.zip x64\Release\nhanes-csv-split.exe
       - store_artifacts:
-          path: c:\Users\circleci\project\src\nhanes-csv-splitnhanes-csv-split.win-x86.zip
+          path: c:\Users\circleci\project\src\nhanes-csv-split.win-x86.zip
           destination: nhanes-csv-split.win-x86.zip
       - store_artifacts:
           path: c:\Users\circleci\project\src\nhanes-csv-split.win-x64.zip
