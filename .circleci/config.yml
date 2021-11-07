@@ -1,4 +1,8 @@
 version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
 jobs:
   # Building with GCC
   build_job_gcc:
@@ -12,10 +16,10 @@ jobs:
       - checkout
       - run:
           name: Run bootstrap
-          command: sh script/bootstrap
+          command: ./script/bootstrap
       - run:
           name: Run CI script
-          command: sh script/cibuild
+          command: ./script/cibuild
       - store_test_results:
           path: builddir/meson-logs
       - store_artifacts:
@@ -37,19 +41,56 @@ jobs:
       - checkout
       - run:
           name: Run bootstrap
-          command: sh script/bootstrap
+          command: ./script/bootstrap
       - run:
           name: Run CI script
-          command: sh script/cibuild
+          command: ./script/cibuild
       - store_test_results:
           path: builddir/meson-logs
       - store_artifacts:
           path: builddir/compressed-artifacts/pa-pattern-complexity.tar.gz
           destination: pa-pattern-complexity.tar.gz
 
+  # Building with MSVC
+  build_job_msvc:
+    executor: win/default
+    steps:
+      - checkout
+      - run:
+          name: Download VS Build tools
+          shell: bash.exe
+          command: curl -sSJOL "https://aka.ms/vs/16/release/vs_buildtools.exe"
+      - run:
+          name: Install msvc C++ build tools
+          command: .\vs_buildtools.exe --quiet --wait --norestart --nocache             `
+                    --channelUri "https://aka.ms/vs/16/release/channel"                 `
+                    --installChannelUri "https://aka.ms/vs/16/release/channel"          `
+                    --add Microsoft.VisualStudio.Workload.VCTools                       `
+                    --includeRecommended                                                `
+                    --installPath "C:\BuildTools"
+      - run:
+          name: Compile
+          shell: powershell.exe
+          command: |
+            cd "c:\Users\circleci\project\src\"
+            & "C:\BuildTools\Common7\Tools\VsDevCmd.bat" "-arch=x86"
+            msbuild nhanes.vs.sln /p:Configuration=Release /p:Platform=x86
+            & "C:\BuildTools\Common7\Tools\VsDevCmd.bat" "-arch=x64"
+            msbuild nhanes.vs.sln /p:Configuration=Release /p:Platform=x64
+            7z a -tzip nhanes-csv-split.win-x86.zip .\Release\nhanes-csv-split.exe
+            7z a -tzip nhanes-csv-split.win-x64.zip .\x64\Release\nhanes-csv-split.exe
+      - store_artifacts:
+          path: c:\Users\circleci\project\src\nhanes-csv-split.win-x86.zip
+          destination: nhanes-csv-split.win-x86.zip
+      - store_artifacts:
+          path: c:\Users\circleci\project\src\nhanes-csv-split.win-x64.zip
+          destination: nhanes-csv-split.win-x64.zip
+
 workflows:
   build_workflow:
     jobs:
+      - build_job_msvc:
+          context: omdr
       - build_job_clang:
           context: omdr
       - build_job_gcc:

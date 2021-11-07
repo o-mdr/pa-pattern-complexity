@@ -15,3 +15,10 @@ data/study-*
 # C++ executable used in debugging
 src/nhanes-csv-split/main
 
+# VS
+.vs*
+**/Debug/*
+**/Release/*
+**/x64/*
+**/obj/*
+**.vcxproj.user
